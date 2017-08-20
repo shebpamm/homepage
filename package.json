@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/shebpamm/homepage#readme",
   "dependencies": {
+    "browser-sync": "^2.18.13",
     "express": "^4.15.4",
-    "pug": "^2.0.0-rc.3",
-    "sass": "^1.0.0-beta.2"
+    "gulp-nodemon": "^2.2.1",
+    "gulp-pug": "^3.3.0",
+    "node-sass-middleware": "^0.11.0",
+    "pug": "^2.0.0-rc.3"
   }
 }
