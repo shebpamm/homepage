@@ -4,6 +4,8 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var nodemon = require('gulp-nodemon');
 var pug = require('gulp-pug')
+var gutil = require('gulp-util');
+var sass = require('gulp-sass');
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
@@ -52,14 +54,14 @@ gulp.task('browser-sync', ['nodemon'], function () {
 });
 
 gulp.task('js',  function () {
-  return gulp.src('public/**/*.js')
+  return gulp.src('base/public/**/*.js')
     // do stuff to JavaScript files
     //.pipe(uglify())
     //.pipe(gulp.dest('...'));
 });
 
 gulp.task('css', function () {
-  return gulp.src('public/css')
+  return gulp.src('base/public/css')
     .pipe(browserSync.reload({ stream: true }));
 })
 
@@ -68,23 +70,18 @@ gulp.task('bs-reload', function () {
 });
 
 gulp.task('sass', function() {
-    return gulp
-        .src('./app/scss/*.scss')
-        .pipe(sass())
-        .on('error', sass.logError)
-        .pipe(gulp.dest('./dist/css'))
-        .pipe(reload({ stream: true }));
+    return gulp.src('base/dev/scss/*.scss').pipe(sass()).on('error', sass.logError).pipe(gulp.dest('base/public/css')).pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('pug', function() {
-    return gulp.src('dev/views/*.pug')
-    .pipe(pug({})).pipe(gulp.dest)
+    gutil.log("pugged lol")
+    return gulp.src('base/dev/views/*.pug').pipe(pug({})).pipe(gulp.dest('base/public/views/'));
 });
 
 gulp.task('default', ['browser-sync'], function () {
-  gulp.watch('public/**/*.js',   ['js', browserSync.reload]);
-  gulp.watch('public/**/*.css',  ['css']);
-  gulp.watch('public/**/*.html', ['bs-reload']);
-  guld.watch('public/**/*.pug', ['pug']);
-  gulp.watch('public/**/*.sass', ['sass']);
+  gulp.watch('base/public/**/*.js',   ['js', browserSync.reload]);
+  gulp.watch('base/public/**/*.css',  ['css']);
+  gulp.watch('base/public/**/*.html', ['bs-reload']);
+  gulp.watch('base/dev/views/*.pug', ['pug']);
+  gulp.watch('base/dev/scss/*.scss', ['sass']);
 });
