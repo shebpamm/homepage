@@ -22,6 +22,7 @@
   "homepage": "https://github.com/shebpamm/homepage#readme",
   "dependencies": {
     "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3",
     "sass": "^1.0.0-beta.2"
   }
 }
